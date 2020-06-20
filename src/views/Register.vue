@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     registerUser () {
-      const baseURI = 'http://192.168.1.24:3001/register'
+      const baseURI = 'http://192.168.1.12:3001/register'
       const dt = {
         user: this.username,
         password: this.password,
