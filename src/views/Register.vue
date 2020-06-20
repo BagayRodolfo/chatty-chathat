@@ -4,7 +4,7 @@
       <div class="content-title">User Registration</div>
       <div class="content">
         <div class="form-register">
-          <form>
+          <div>
             <div class="username">
               <label>Username:</label>
               <input type="text" name="" id="">
@@ -25,7 +25,7 @@
               <input type="email" name="" id="">
               <span class="error-icon"></span>
             </div>
-          </form>
+          </div>
           <div class="btn-register">
             <button>Register</button>
           </div>
@@ -39,8 +39,28 @@ export default {
   data () {
     return {}
   },
-  methods: {},
-  mounted () {}
+  methods: {
+    registerUser () {
+      const baseURI = 'http://192.168.1.12:3001/register'
+      const dt = { user: 'keanu', password: '123', email: '123@gmail.com' }
+      const params = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          Accept: '*/*'
+        }
+      }
+      this.$https.post(baseURI, dt, params)
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  },
+  mounted () {
+    this.registerUser()
+  }
 }
 </script>
 <style lang="scss">
