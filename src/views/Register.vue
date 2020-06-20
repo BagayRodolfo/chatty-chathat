@@ -7,27 +7,27 @@
           <div>
             <div class="username">
               <label>Username:</label>
-              <input type="text" name="" id="">
+              <input v-model="username" type="text">
               <span class="error-icon"></span>
             </div>
             <div class="password">
               <label>Password:</label>
-              <input type="password" name="" id="">
+              <input v-model="password" type="password">
               <span class="error-icon"></span>
             </div>
             <div class="confirm-password">
               <label>Confirm Password</label>
-              <input type="password" name="" id="">
+              <input type="password">
               <span class="error-icon"></span>
             </div>
             <div class="email">
               <label>Email:</label>
-              <input type="email" name="" id="">
+              <input v-model="email" type="email">
               <span class="error-icon"></span>
             </div>
           </div>
           <div class="btn-register">
-            <button>Register</button>
+            <button @click="registerUser()">Register</button>
           </div>
         </div>
       </div>
@@ -37,20 +37,29 @@
 <script>
 export default {
   data () {
-    return {}
+    return {
+      username: '',
+      password: '',
+      isSamePassword: false,
+      email: ''
+    }
   },
   methods: {
     registerUser () {
-      const baseURI = 'http://192.168.1.24:3001/register'
-      const dt = { user: 'keanu', password: '123', email: '123@gmail.com' }
-      const params = {
+      const baseURI = 'http://192.168.1.12:3001/register'
+      const dt = {
+        user: this.username,
+        password: this.password,
+        email: this.email
+      }
+      const conf = {
         headers: {
           'Access-Control-Allow-Headers': 'Content-Type',
           'Content-Type': 'application/json',
           Accept: '*/*'
         }
       }
-      this.$https.post(baseURI, dt, params)
+      this.$https.post(baseURI, dt, conf)
         .then((res) => {
           console.log(res)
         })
@@ -58,9 +67,6 @@ export default {
           console.log(error)
         })
     }
-  },
-  mounted () {
-    this.registerUser()
   }
 }
 </script>
