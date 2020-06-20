@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require('cors');
+const mongoose = require('mongoose');
 const router = express.Router();
 const app = express();
 
@@ -21,6 +22,12 @@ const addHeaders = (res) => {
   res.setHeader('Content-Type', 'application/json');
   return res;
 }
+const userSchema = new mongoose.Schema({
+  user: String,
+  password: String,
+  email: String
+});
+const Users = mongoose.model('user', userSchema);
 app.post('/login',function(req,res){
   var user_name=req.body.user;
   var password=req.body.password;
@@ -28,15 +35,16 @@ app.post('/login',function(req,res){
   res.end("yes");
 });
 
-app.post('/register', function (req,res) {
-  var user_name = req.body.user;
-  var password = req.body.password;
-  var email = req.body.email;
-  console.log(user_name, password, email);
-  addHeaders(res).end(JSON.stringify({status: 200}));
+app.post('/register',async  (req,res) => {
+  const testUser = await Users.create(req.body);
+  addHeaders(res).status(201).json({
+    status: 'success',
+    data: { user: testUser }
+  }).end();
 });
 
-app.listen(3001,() => {
-  console.log("Started on PORT 3001");
-})
-
+mongoose.connect('mongodb://192.168.1.24/chattyserver').then(() => {
+  app.listen(3001,() => {
+    console.log("Started on PORT 3000");
+  })
+});
