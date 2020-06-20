@@ -41,11 +41,12 @@ export default {
   },
   methods: {
     registerUser () {
-      const baseURI = 'http://192.168.1.12:3001/register'
+      const baseURI = 'http://192.168.1.24:3001/register'
       const dt = { user: 'keanu', password: '123', email: '123@gmail.com' }
       const params = {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Content-Type': 'application/json',
           Accept: '*/*'
         }
       }
