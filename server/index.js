@@ -28,19 +28,42 @@ const userSchema = new mongoose.Schema({
   email: String
 });
 const Users = mongoose.model('user', userSchema);
-app.post('/login',function(req,res){
-  var user_name=req.body.user;
-  var password=req.body.password;
-  console.log("User name = "+user_name+", password is "+password);
-  res.end("yes");
+app.post('/login',async function(req,res){
+  const query = {
+    user: req.body.user,
+    password: req.body.password
+  };
+  const selectUser = await Users.find(query);
+  if (selectUser.length) {
+    addHeaders(res).status(201).json({
+      status: 'success'
+    }).end();
+  } else {
+    addHeaders(res).status(201).json({
+      status: 'Not exist',
+    }).end();
+  }
+  // var user_name=req.body.user;
+  // var password=req.body.password;
+  // console.log("User name = "+user_name+", password is "+password);
+  // res.end("yes");
 });
 
 app.post('/register',async  (req,res) => {
-  const testUser = await Users.create(req.body);
-  addHeaders(res).status(201).json({
-    status: 'success',
-    data: { user: testUser }
-  }).end();
+  const query = { user: req.body.user };
+  const selectAllUsers = await Users.find(query);
+  // console.log(selectAllUsers);
+  if (!selectAllUsers.length) {
+    const testUser = await Users.create(req.body);
+    addHeaders(res).status(201).json({
+      status: 'success',
+      data: { user: testUser }
+    }).end();
+  } else {
+    addHeaders(res).status(201).json({
+      status: 'Exist'
+    }).end();
+  }
 });
 
 mongoose.connect('mongodb://192.168.1.24/chattyserver').then(() => {

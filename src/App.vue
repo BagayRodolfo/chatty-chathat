@@ -5,15 +5,18 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/> -->
-    <Register></Register>
+    <!-- <Register></Register> -->
+    <Login></Login>
   </div>
 </template>
 <script>
-import Register from './views/Register.vue'
+import Login from './views/Login.vue'
+// import Register from './views/Register.vue'
 
 export default {
   components: {
-    Register
+    // Register
+    Login
   }
 }
 </script>

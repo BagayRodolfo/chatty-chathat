@@ -1,33 +1,23 @@
 <template>
-  <div class="register">
-    <div class="register-container">
-      <div class="content-title">User Registration</div>
+  <div class="login">
+    <div class="login-container">
+      <div class="content-title">User Login</div>
       <div class="content">
-        <div class="form-register">
-          <div class="register-fields">
+        <div class="form-login">
+          <div class="login-fields">
             <div class="username">
               <label>Username:</label>
               <input v-model="username" type="text">
               <span class="error-icon"></span>
             </div>
             <div class="password">
-              <label>Password:</label>
+              <label>Password</label>
               <input v-model="password" type="password">
               <span class="error-icon"></span>
             </div>
-            <div class="confirm-password">
-              <label>Confirm Password</label>
-              <input type="password">
-              <span class="error-icon"></span>
-            </div>
-            <div class="email">
-              <label>Email:</label>
-              <input v-model="email" type="email">
-              <span class="error-icon"></span>
-            </div>
           </div>
-          <div class="btn-register">
-            <button @click="registerUser()">Register</button>
+          <div class="btn-login">
+            <button @click="login()">Login</button>
           </div>
         </div>
       </div>
@@ -39,18 +29,15 @@ export default {
   data () {
     return {
       username: '',
-      password: '',
-      isSamePassword: false,
-      email: ''
+      password: ''
     }
   },
   methods: {
-    registerUser () {
-      const baseURI = 'http://192.168.1.12:3001/register'
+    login () {
+      const baseURI = 'http://192.168.1.12:3001/login'
       const dt = {
         user: this.username,
-        password: this.password,
-        email: this.email
+        password: this.password
       }
       const conf = {
         headers: {
@@ -61,7 +48,13 @@ export default {
       }
       this.$https.post(baseURI, dt, conf)
         .then((res) => {
-          console.log(res.data)
+          console.log(this)
+          if (res.data.status === 'success') {
+            console.log(res.data.user)
+            this.$store.dispatch('loginUser')
+          } else {
+            console.log(res.data.status)
+          }
         })
         .catch((error) => {
           console.log(error)
@@ -70,6 +63,3 @@ export default {
   }
 }
 </script>
-<style lang="scss">
-
-</style>
