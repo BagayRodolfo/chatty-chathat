@@ -1,13 +1,22 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <router-view/> -->
+    <Register></Register>
   </div>
 </template>
+<script>
+import Register from './views/Register.vue'
 
+export default {
+  components: {
+    Register
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
