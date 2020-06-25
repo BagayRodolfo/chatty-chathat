@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
   email: String
 });
 const Users = mongoose.model('user', userSchema);
-app.post('/login',async function(req,res){
+app.post('/base/login',async function(req,res){
   const query = {
     user: req.body.user,
     password: req.body.password
@@ -44,12 +44,12 @@ app.post('/login',async function(req,res){
     }).end();
   }
   // var user_name=req.body.user;
-  // var password=req.body.password;
+  // var password=req.body.password; 
   // console.log("User name = "+user_name+", password is "+password);
   // res.end("yes");
 });
 
-app.post('/register',async  (req,res) => {
+app.post('/base/register',async  (req,res) => {
   const query = { user: req.body.user };
   const selectAllUsers = await Users.find(query);
   // console.log(selectAllUsers);

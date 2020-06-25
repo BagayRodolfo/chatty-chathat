@@ -46,20 +46,20 @@ export default {
   },
   methods: {
     registerUser () {
-      const baseURI = 'http://192.168.1.12:3001/register'
+      // const baseURI = 'http://192.168.1.12:3001/register'
       const dt = {
         user: this.username,
         password: this.password,
         email: this.email
       }
-      const conf = {
-        headers: {
-          'Access-Control-Allow-Headers': 'Content-Type',
-          'Content-Type': 'application/json',
-          Accept: '*/*'
-        }
-      }
-      this.$https.post(baseURI, dt, conf)
+      // const conf = {
+      //   headers: {
+      //     'Access-Control-Allow-Headers': 'Content-Type',
+      //     'Content-Type': 'application/json',
+      //     Accept: '*/*'
+      //   }
+      // }
+      this.$https.post('register', dt)
         .then((res) => {
           console.log(res.data)
         })

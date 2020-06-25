@@ -3,21 +3,13 @@
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-    </div>
-    <router-view/> -->
-    <!-- <Register></Register> -->
-    <Login></Login>
+    </div>-->
+    <router-view/>
   </div>
 </template>
 <script>
-import Login from './views/Login.vue'
-// import Register from './views/Register.vue'
 
 export default {
-  components: {
-    // Register
-    Login
-  }
 }
 </script>
 <style lang="scss">
