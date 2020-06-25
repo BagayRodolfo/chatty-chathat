@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import https from './utils/https'
+import './assets/scss/main.scss'
 
 Vue.prototype.$https = https
 Vue.config.productionTip = false

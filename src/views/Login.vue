@@ -1,24 +1,29 @@
 <template>
   <div class="login">
     <div class="login-container">
-      <div class="content-title">User Login</div>
+      <div class="content-title">
+        <div class="main-text">Minimal</div>
+        <div class="sub-text">Chat App</div>
+      </div>
       <div class="content">
         <div class="form-login">
+          <div class="form-title">Login</div>
           <div class="login-fields">
             <div class="username">
-              <label>Username:</label>
+              <label>Username</label>
               <input v-model="username" type="text">
-              <span class="error-icon"></span>
+              <!-- <span class="error-icon"></span> -->
             </div>
             <div class="password">
               <label>Password</label>
               <input v-model="password" type="password">
-              <span class="error-icon"></span>
+              <!-- <span class="error-icon"></span> -->
             </div>
+            <div class="forgot-pass">Forgot password?</div>
           </div>
-          <div class="btn-login">
-            <button @click="login()">Login</button>
-          </div>
+        </div>
+        <div class="btn-login">
+          <button @click="login()">LOGIN NOW</button>
         </div>
       </div>
     </div>
